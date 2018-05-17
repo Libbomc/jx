@@ -37,7 +37,7 @@ public class WonmomentsServiceImpl implements WonmomentsService {
     public boolean updateWonmoments(Wonmoments wonmoments) {
         boolean flag = false;
         try {
-            wonmomentsMapper.updateByPrimaryKey(wonmoments);
+            wonmomentsMapper.updateByPrimaryKeySelective(wonmoments);
             flag = true;
         } catch (Exception e) {
             System.out.println("修改失败");

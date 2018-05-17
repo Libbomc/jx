@@ -38,7 +38,7 @@ public class NewsServiceImpl implements NewsService {
     public boolean updateNews(News news) {
         boolean flag = false;
         try {
-            newsMapper.updateByPrimaryKey(news);
+            newsMapper.updateByPrimaryKeySelective(news);
             flag = true;
         } catch (Exception e) {
             System.out.println("修改失败");

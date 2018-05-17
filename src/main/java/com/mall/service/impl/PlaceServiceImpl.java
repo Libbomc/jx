@@ -38,7 +38,7 @@ public class PlaceServiceImpl implements PlaceService {
     public boolean updatePlace(Place place) {
         boolean flag = false;
         try {
-            placeMapper.updateByPrimaryKey(place);
+            placeMapper.updateByPrimaryKeySelective(place);
             flag = true;
         } catch (Exception e) {
             System.out.println("修改失败");

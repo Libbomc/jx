@@ -50,7 +50,7 @@ public class ActiveServiceImpl implements ActiveService {
     public boolean updateActive(Active active) {
         boolean flag = false;
         try {
-            activeMapper.updateByPrimaryKey(active);
+            activeMapper.updateByPrimaryKeySelective(active);
             flag = true;
         } catch (Exception e) {
             System.out.println("修改失败");

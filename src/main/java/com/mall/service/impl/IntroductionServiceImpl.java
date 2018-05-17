@@ -37,7 +37,7 @@ public class IntroductionServiceImpl implements IntroductionService {
     public boolean updateIntroduction(Introduction introduction) {
         boolean flag = false;
         try {
-            introductionMapper.updateByPrimaryKey(introduction);
+            introductionMapper.updateByPrimaryKeySelective(introduction);
             flag = true;
         } catch (Exception e) {
             System.out.println("修改失败");

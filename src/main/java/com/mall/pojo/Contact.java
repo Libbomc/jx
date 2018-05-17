@@ -18,12 +18,12 @@ public class Contact {
     private String contactEmail;
 
     @ApiModelProperty(value = "电话")
-    private Integer contactPhone;
+    private Long contactPhone;
 
     @ApiModelProperty(value = "发送的信息")
     private String contactMessage;
 
-    public Contact(Integer contactId, String contactName, String contactEmail, Integer contactPhone, String contactMessage) {
+    public Contact(Integer contactId, String contactName, String contactEmail, Long contactPhone, String contactMessage) {
         this.contactId = contactId;
         this.contactName = contactName;
         this.contactEmail = contactEmail;
@@ -59,11 +59,11 @@ public class Contact {
         this.contactEmail = contactEmail == null ? null : contactEmail.trim();
     }
 
-    public Integer getContactPhone() {
+    public Long getContactPhone() {
         return contactPhone;
     }
 
-    public void setContactPhone(Integer contactPhone) {
+    public void setContactPhone(Long contactPhone) {
         this.contactPhone = contactPhone;
     }
 

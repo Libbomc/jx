@@ -33,7 +33,7 @@ public class AboutusServiceImpl implements AboutusService {
     public boolean updateAboutus(Aboutus aboutus) {
         boolean flag = false;
         try {
-            aboutusMapper.updateByPrimaryKey(aboutus);
+            aboutusMapper.updateByPrimaryKeySelective(aboutus);
             flag = true;
         } catch (Exception e) {
             System.out.println("修改失败");

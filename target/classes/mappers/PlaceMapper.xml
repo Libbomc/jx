@@ -7,7 +7,7 @@
             <arg column="place_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
             <arg column="place_address" jdbcType="VARCHAR" javaType="java.lang.String"/>
             <arg column="place_introduction" jdbcType="VARCHAR" javaType="java.lang.String"/>
-            <arg column="place_time" jdbcType="VARCHAR" javaType="java.lang.String" />
+            <arg column="place_time" jdbcType="VARCHAR" javaType="java.lang.String"/>
             <arg column="place_url" jdbcType="VARCHAR" javaType="java.lang.String"/>
         </constructor>
     </resultMap>
@@ -35,7 +35,7 @@
         delete from place
         where place_id = #{placeId,jdbcType=INTEGER}
     </delete>
-    <insert id="insert" parameterType="com.mall.pojo.Place" >
+    <insert id="insert" parameterType="com.mall.pojo.Place">
         insert into place (place_id, place_name, place_address,
         place_introduction, place_time, place_url
         )
@@ -43,79 +43,79 @@
         #{placeIntroduction,jdbcType=VARCHAR}, #{placeTime,jdbcType=VARCHAR}, #{placeUrl,jdbcType=VARCHAR}
         )
     </insert>
-    <insert id="insertSelective" parameterType="com.mall.pojo.Place" >
+    <insert id="insertSelective" parameterType="com.mall.pojo.Place">
         insert into place
-        <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="placeId != null" >
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="placeId != null">
                 place_id,
             </if>
-            <if test="placeName != null" >
+            <if test="placeName != null">
                 place_name,
             </if>
-            <if test="placeAddress != null" >
+            <if test="placeAddress != null">
                 place_address,
             </if>
-            <if test="placeIntroduction != null" >
+            <if test="placeIntroduction != null">
                 place_introduction,
             </if>
-            <if test="placeTime != null" >
+            <if test="placeTime != null">
                 place_time,
             </if>
-            <if test="placeUrl != null" >
+            <if test="placeUrl != null">
                 place_url,
             </if>
         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="placeId != null" >
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="placeId != null">
                 #{placeId,jdbcType=INTEGER},
             </if>
-            <if test="placeName != null" >
+            <if test="placeName != null">
                 #{placeName,jdbcType=VARCHAR},
             </if>
-            <if test="placeAddress != null" >
+            <if test="placeAddress != null">
                 #{placeAddress,jdbcType=VARCHAR},
             </if>
-            <if test="placeIntroduction != null" >
+            <if test="placeIntroduction != null">
                 #{placeIntroduction,jdbcType=VARCHAR},
             </if>
-            <if test="placeTime != null" >
+            <if test="placeTime != null">
                 #{placeTime,jdbcType=VARCHAR},
             </if>
-            <if test="placeUrl != null" >
+            <if test="placeUrl != null">
                 #{placeUrl,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.mall.pojo.Place" >
+    <update id="updateByPrimaryKeySelective" parameterType="com.mall.pojo.Place">
         update place
-        <set >
-            <if test="placeName != null" >
+        <set>
+            <if test="placeName != null">
                 place_name = #{placeName,jdbcType=VARCHAR},
             </if>
-            <if test="placeAddress != null" >
+            <if test="placeAddress != null">
                 place_address = #{placeAddress,jdbcType=VARCHAR},
             </if>
-            <if test="placeIntroduction != null" >
+            <if test="placeIntroduction != null">
                 place_introduction = #{placeIntroduction,jdbcType=VARCHAR},
             </if>
-            <if test="placeTime != null" >
+            <if test="placeTime != null">
                 place_time = #{placeTime,jdbcType=VARCHAR},
             </if>
-            <if test="placeUrl != null" >
+            <if test="placeUrl != null">
                 place_url = #{placeUrl,jdbcType=VARCHAR},
             </if>
         </set>
         where place_id = #{placeId,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.mall.pojo.Place" >
-    update place
-    set place_name = #{placeName,jdbcType=VARCHAR},
-      place_address = #{placeAddress,jdbcType=VARCHAR},
-      place_introduction = #{placeIntroduction,jdbcType=VARCHAR},
-      place_time = #{placeTime,jdbcType=VARCHAR},
-      place_url = #{placeUrl,jdbcType=VARCHAR}
-    where place_id = #{placeId,jdbcType=INTEGER}
-  </update>
+    <update id="updateByPrimaryKey" parameterType="com.mall.pojo.Place">
+        update place
+        set place_name = #{placeName,jdbcType=VARCHAR},
+        place_address = #{placeAddress,jdbcType=VARCHAR},
+        place_introduction = #{placeIntroduction,jdbcType=VARCHAR},
+        place_time = #{placeTime,jdbcType=VARCHAR},
+        place_url = #{placeUrl,jdbcType=VARCHAR}
+        where place_id = #{placeId,jdbcType=INTEGER}
+    </update>
 
     <update id="placePhoto" parameterType="com.mall.pojo.Place">
         update place

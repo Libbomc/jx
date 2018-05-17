@@ -35,7 +35,7 @@ public class ContactServiceImpl implements ContactService {
     public boolean updateContact(Contact contact) {
         boolean flag = false;
         try {
-            contactMapper.updateByPrimaryKey(contact);
+            contactMapper.updateByPrimaryKeySelective(contact);
             flag = true;
         } catch (Exception e) {
             System.out.println("修改失败");

@@ -43,7 +43,7 @@ public class NoticeController {
         String sqlpath2 = null;
         if (multipartFile != null) {
             //定义存储路径，这个路径可以随意改动，文件夹的名称的命名方式是根据添加数据的ID进行储存
-            String path = "E:\\software\\jxx\\src\\main\\webapp\\img\\notice\\" + notice.getNoticeId() + "\\";
+            String path = "E://software//jxx//src//main//webapp//img//notice//" + notice.getNoticeId() + "//";
             File file2 = new File(path);
             //判断这个文件夹是否存在，不存在就创建
             if (!file2.exists()) {

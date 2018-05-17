@@ -57,7 +57,7 @@ public class ActiveController {
         String sqlpath2 = null;
         if (multipartFile != null) {
             //定义存储路径，这个路径可以随意改动，文件夹的名称的命名方式是根据添加数据的ID进行储存
-            String path = "E:\\software\\jxx\\src\\main\\webapp\\img\\active\\" + active.getActiveId() + "\\";
+            String path = "E://software//jxx//src//main//webapp//img//active//" + active.getActiveId() + "//";
             File file2 = new File(path);
             //判断这个文件夹是否存在，不存在就创建
             if (!file2.exists()) {
@@ -75,9 +75,9 @@ public class ActiveController {
                     //按循环的方式进行将图片命名，但是文件夹的名称的命名方式是根据添加数据的ID进行储存
                     String newFilename = i + filename.substring(filename.lastIndexOf("."));
                     //图片存储在这个ID下的文件夹
-                    File file1 = new File(path + "\\" + newFilename);
+                    File file1 = new File(path + "//" + newFilename);
                     file.transferTo(file1);
-                    sqlpath2 = "\\img\\active\\" + active.getActiveId() + "\\" + newFilename;
+                    sqlpath2 = "//img//active//" + active.getActiveId() + "//" + newFilename;
                     sqlpath.add(sqlpath2);
                     System.out.println(file);
                 }
@@ -120,7 +120,7 @@ public class ActiveController {
         String sqlpath2 = null;
         if (multipartFile != null) {
             //定义存储路径，这个路径可以随意改动，文件夹的名称的命名方式是根据添加数据的ID进行储存
-            String path = "E:\\software\\jxx\\src\\main\\webapp\\img\\active\\" + active.getActiveId() + "\\";
+            String path = "E://software//jxx//src//main//webapp//img//active//" + active.getActiveId() + "//";
             File file2 = new File(path);
             //判断这个文件夹是否存在，不存在就创建
             if (!file2.exists()) {
@@ -138,9 +138,9 @@ public class ActiveController {
                     //按循环的方式进行将图片命名，但是文件夹的名称的命名方式是根据添加数据的ID进行储存
                     String newFilename = i + filename.substring(filename.lastIndexOf("."));
                     //图片存储在这个ID下的文件夹
-                    File file1 = new File(path + "\\" + newFilename);
+                    File file1 = new File(path + "//" + newFilename);
                     file.transferTo(file1);
-                    sqlpath2 = "\\img\\active\\" + active.getActiveId() + "\\" + newFilename;
+                    sqlpath2 = "//img//active//" + active.getActiveId() + "//" + newFilename;
                     sqlpath.add(sqlpath2);
                     System.out.println(file);
                 }
@@ -174,7 +174,7 @@ public class ActiveController {
        }
 */
         System.out.println(activeId);
-        String path = "E:\\software\\jxx\\src\\main\\webapp\\img\\active\\" + activeId;
+        String path = "E://software//jxx//src//main//webapp//img//active//" + activeId;
         File file = new File(path);
         //file.delete();
         if (!file.isDirectory()) {
@@ -182,7 +182,7 @@ public class ActiveController {
         } else {
             String[] filelist = file.list();
             for (int i = 0; i < filelist.length; i++) {
-                File file1 = new File(path + "\\" + filelist[i]);
+                File file1 = new File(path + "//" + filelist[i]);
                 //检查外层的文件夹，然后先进行里面的文件删除，再到外层
                 if (!file1.isDirectory()) {
                     file1.delete();

@@ -29,6 +29,7 @@ public class Active {
     }
 
 
+
     public Active() {
         super();
     }
@@ -64,4 +65,6 @@ public class Active {
     public void setActiveUrl(String activeUrl) {
         this.activeUrl = activeUrl == null ? null : activeUrl.trim();
     }
+
+
 }

@@ -37,7 +37,7 @@ public class NoticeServiceImpl implements NoticeService {
     public boolean updateNotice(Notice notice) {
         boolean flag = false;
         try {
-            noticeMapper.updateByPrimaryKey(notice);
+            noticeMapper.updateByPrimaryKeySelective(notice);
             flag = true;
         } catch (Exception e) {
             System.out.println("修改失败");

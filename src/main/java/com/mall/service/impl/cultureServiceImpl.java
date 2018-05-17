@@ -37,7 +37,7 @@ public class cultureServiceImpl implements CultureService {
     public boolean updateCulture(Culture culture) {
         boolean flag = false;
         try {
-            cultureMapper.updateByPrimaryKey(culture);
+            cultureMapper.updateByPrimaryKeySelective(culture);
             flag = true;
         } catch (Exception e) {
             System.out.println("修改失败");

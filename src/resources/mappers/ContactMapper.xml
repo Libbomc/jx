@@ -6,7 +6,7 @@
             <idArg column="contact_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
             <arg column="contact_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
             <arg column="contact_email" jdbcType="VARCHAR" javaType="java.lang.String"/>
-            <arg column="contact_phone" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="contact_phone" jdbcType="BIGINT" javaType="java.lang.Long"/>
             <arg column="contact_message" jdbcType="VARCHAR" javaType="java.lang.String"/>
         </constructor>
     </resultMap>
@@ -27,7 +27,7 @@
         insert into contact (contact_id, contact_name, contact_email,
         contact_phone, contact_message)
         values (#{contactId,jdbcType=INTEGER}, #{contactName,jdbcType=VARCHAR}, #{contactEmail,jdbcType=VARCHAR},
-        #{contactPhone,jdbcType=INTEGER}, #{contactMessage,jdbcType=VARCHAR})
+        #{contactPhone,jdbcType=BIGINT}, #{contactMessage,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.mall.pojo.Contact">
         insert into contact
@@ -59,7 +59,7 @@
                 #{contactEmail,jdbcType=VARCHAR},
             </if>
             <if test="contactPhone != null">
-                #{contactPhone,jdbcType=INTEGER},
+                #{contactPhone,jdbcType=BIGINT},
             </if>
             <if test="contactMessage != null">
                 #{contactMessage,jdbcType=VARCHAR},
@@ -76,7 +76,7 @@
                 contact_email = #{contactEmail,jdbcType=VARCHAR},
             </if>
             <if test="contactPhone != null">
-                contact_phone = #{contactPhone,jdbcType=INTEGER},
+                contact_phone = #{contactPhone,jdbcType=BIGINT},
             </if>
             <if test="contactMessage != null">
                 contact_message = #{contactMessage,jdbcType=VARCHAR},
@@ -88,7 +88,7 @@
         update contact
         set contact_name = #{contactName,jdbcType=VARCHAR},
         contact_email = #{contactEmail,jdbcType=VARCHAR},
-        contact_phone = #{contactPhone,jdbcType=INTEGER},
+        contact_phone = #{contactPhone,jdbcType=BIGINT},
         contact_message = #{contactMessage,jdbcType=VARCHAR}
         where contact_id = #{contactId,jdbcType=INTEGER}
     </update>
