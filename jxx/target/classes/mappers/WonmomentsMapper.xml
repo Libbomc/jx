@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.dao.WonmomentsMapper">
+    <resultMap id="BaseResultMap" type="com.mall.pojo.Wonmoments">
+        <constructor>
+            <idArg column="wonmoment_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="wonmoment_title" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="wonmoment_content" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="wonmoment_url" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        wonmoment_id, wonmoment_title, wonmoment_content, wonmoment_url
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from wonmoments
+        where wonmoment_id = #{wonmomentId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from wonmoments
+        where wonmoment_id = #{wonmomentId,jdbcType=INTEGER}
+    </delete>
+    <select id="selectByPrimaryTitle" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from wonmoments
+        where wonmoment_Title = #{wonmomentTitle,jdbcType=VARCHAR}
+    </select>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from wonmoments
+
+    </select>
+    <insert id="insert" parameterType="com.mall.pojo.Wonmoments">
+        insert into wonmoments (wonmoment_id, wonmoment_title, wonmoment_content,
+        wonmoment_url)
+        values (#{wonmomentId,jdbcType=INTEGER}, #{wonmomentTitle,jdbcType=VARCHAR},
+        #{wonmomentContent,jdbcType=VARCHAR},
+        #{wonmomentUrl,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.mall.pojo.Wonmoments">
+        insert into wonmoments
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="wonmomentId != null">
+                wonmoment_id,
+            </if>
+            <if test="wonmomentTitle != null">
+                wonmoment_title,
+            </if>
+            <if test="wonmomentContent != null">
+                wonmoment_content,
+            </if>
+            <if test="wonmomentUrl != null">
+                wonmoment_url,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="wonmomentId != null">
+                #{wonmomentId,jdbcType=INTEGER},
+            </if>
+            <if test="wonmomentTitle != null">
+                #{wonmomentTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="wonmomentContent != null">
+                #{wonmomentContent,jdbcType=VARCHAR},
+            </if>
+            <if test="wonmomentUrl != null">
+                #{wonmomentUrl,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mall.pojo.Wonmoments">
+        update wonmoments
+        <set>
+            <if test="wonmomentTitle != null">
+                wonmoment_title = #{wonmomentTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="wonmomentContent != null">
+                wonmoment_content = #{wonmomentContent,jdbcType=VARCHAR},
+            </if>
+            <if test="wonmomentUrl != null">
+                wonmoment_url = #{wonmomentUrl,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where wonmoment_id = #{wonmomentId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mall.pojo.Wonmoments">
+        update wonmoments
+        set wonmoment_title = #{wonmomentTitle,jdbcType=VARCHAR},
+        wonmoment_content = #{wonmomentContent,jdbcType=VARCHAR},
+        wonmoment_url = #{wonmomentUrl,jdbcType=VARCHAR}
+        where wonmoment_id = #{wonmomentId,jdbcType=INTEGER}
+    </update>
+
+    <update id="wonmomentsPhoto" parameterType="com.mall.pojo.Wonmoments">
+        update wonmoments
+        <set>
+
+            <if test="wonmomentUrl != null">
+                wonmoment_url = #{wonmomentUrl,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where wonmoment_id = #{wonmomentId,jdbcType=INTEGER}
+    </update>
+</mapper>

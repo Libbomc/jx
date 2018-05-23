@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.dao.ActivitiesMapper">
+    <resultMap id="BaseResultMap" type="com.mall.pojo.Activities">
+        <constructor>
+            <idArg column="activities_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="activities_title" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="activities_content" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="activities_time" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="activities_type" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="activities_url" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    activities_id, activities_title, activities_content, activities_time, activities_type,
+    activities_url
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from activities
+        where activities_id = #{activitiesId,jdbcType=INTEGER}
+    </select>
+    <select id="findActivitiesType" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from activities
+        where activities_type = #{activitiesType,jdbcType=VARCHAR}
+    </select>
+    <select id="findAllActivities" resultMap="BaseResultMap">
+    select
+    *
+    from activities
+    where activities_id = #{activitiesId,jdbcType=INTEGER}
+  </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from activities
+    where activities_id = #{activitiesId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.mall.pojo.Activities">
+    insert into activities (activities_id, activities_title, activities_content, 
+      activities_time, activities_type, activities_url)
+    values (#{activitiesId,jdbcType=INTEGER}, #{activitiesTitle,jdbcType=VARCHAR}, #{activitiesContent,jdbcType=VARCHAR}, 
+      #{activitiesTime,jdbcType=VARCHAR}, #{activitiesType,jdbcType=VARCHAR}, #{activitiesUrl,jdbcType=VARCHAR)
+  </insert>
+    <insert id="insertSelective" parameterType="com.mall.pojo.Activities">
+        insert into activities
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="activitiesId != null">
+                activities_id,
+            </if>
+            <if test="activitiesTitle != null">
+                activities_title,
+            </if>
+            <if test="activitiesContent != null">
+                activities_content,
+            </if>
+            <if test="activitiesTime != null">
+                activities_time,
+            </if>
+            <if test="activitiesType != null">
+                activities_type,
+            </if>
+            <if test="activitiesUrl != null">
+                activities_url,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="activitiesId != null">
+                #{activitiesId,jdbcType=INTEGER},
+            </if>
+            <if test="activitiesTitle != null">
+                #{activitiesTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="activitiesContent != null">
+                #{activitiesContent,jdbcType=VARCHAR},
+            </if>
+            <if test="activitiesTime != null">
+                #{activitiesTime,jdbcType=VARCHAR},
+            </if>
+            <if test="activitiesType != null">
+                #{activitiesType,jdbcType=VARCHAR},
+            </if>
+            <if test="activitiesUrl != null">
+                #{activitiesUrl,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mall.pojo.Activities">
+        update activities
+        <set>
+            <if test="activitiesTitle != null">
+                activities_title = #{activitiesTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="activitiesContent != null">
+                activities_content = #{activitiesContent,jdbcType=VARCHAR},
+            </if>
+            <if test="activitiesTime != null">
+                activities_time = #{activitiesTime,jdbcType=VARCHAR},
+            </if>
+            <if test="activitiesType != null">
+                activities_type = #{activitiesType,jdbcType=VARCHAR},
+            </if>
+            <if test="activitiesUrl != null">
+                activities_url = #{activitiesUrl,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where activities_id = #{activitiesId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mall.pojo.Activities">
+    update activities
+    set activities_title = #{activitiesTitle,jdbcType=VARCHAR},
+      activities_content = #{activitiesContent,jdbcType=VARCHAR},
+      activities_time = #{activitiesTime,jdbcType=VARCHAR},
+      activities_type = #{activitiesType,jdbcType=VARCHAR},
+      activities_url = #{activitiesUrl,jdbcType=VARCHAR}
+    where activities_id = #{activitiesId,jdbcType=INTEGER}
+  </update>
+    <update id="activitiesa" parameterType="com.mall.pojo.Activities">
+        update active
+        <set>
+
+            <if test="activitiesUrl != null">
+                activities_url = #{activitiesUrl,jdbcType=VARCHAR}},
+            </if>
+        </set>
+        where activities_id = #{activitiesId,jdbcType=INTEGER}
+    </update>
+</mapper>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.dao.VideoMapper">
+    <resultMap id="BaseResultMap" type="com.mall.pojo.Video">
+        <constructor>
+            <idArg column="video_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="video_title" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="video_content" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="video_location" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        video_id, video_title, video_content, video_location
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from video
+        where video_id = #{videoId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from video
+        where video_id = #{videoId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.mall.pojo.Video">
+        insert into video (video_id, video_title, video_content,
+        video_location)
+        values (#{videoId,jdbcType=INTEGER}, #{videoTitle,jdbcType=VARCHAR}, #{videoContent,jdbcType=VARCHAR},
+        #{videoLocation,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.mall.pojo.Video">
+        insert into video
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="videoId != null">
+                video_id,
+            </if>
+            <if test="videoTitle != null">
+                video_title,
+            </if>
+            <if test="videoContent != null">
+                video_content,
+            </if>
+            <if test="videoLocation != null">
+                video_location,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="videoId != null">
+                #{videoId,jdbcType=INTEGER},
+            </if>
+            <if test="videoTitle != null">
+                #{videoTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="videoContent != null">
+                #{videoContent,jdbcType=VARCHAR},
+            </if>
+            <if test="videoLocation != null">
+                #{videoLocation,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mall.pojo.Video">
+        update video
+        <set>
+            <if test="videoTitle != null">
+                video_title = #{videoTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="videoContent != null">
+                video_content = #{videoContent,jdbcType=VARCHAR},
+            </if>
+            <if test="videoLocation != null">
+                video_location = #{videoLocation,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where video_id = #{videoId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mall.pojo.Video">
+        update video
+        set video_title = #{videoTitle,jdbcType=VARCHAR},
+        video_content = #{videoContent,jdbcType=VARCHAR},
+        video_location = #{videoLocation,jdbcType=VARCHAR}
+        where video_id = #{videoId,jdbcType=INTEGER}
+    </update>
+</mapper>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.dao.AboutusMapper">
+    <resultMap id="BaseResultMap" type="com.mall.pojo.Aboutus">
+        <constructor>
+            <idArg column="aboutus_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="about_content" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    aboutus_id, about_content
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from aboutus
+        where aboutus_id = #{aboutusId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from aboutus
+        where aboutus_id = #{aboutusId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.mall.pojo.Aboutus">
+    insert into aboutus (aboutus_id, about_content)
+    values (#{aboutusId,jdbcType=INTEGER}, #{aboutContent,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.mall.pojo.Aboutus">
+        insert into aboutus
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="aboutusId != null">
+                aboutus_id,
+            </if>
+            <if test="aboutContent != null">
+                about_content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="aboutusId != null">
+                #{aboutusId,jdbcType=INTEGER},
+            </if>
+            <if test="aboutContent != null">
+                #{aboutContent,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mall.pojo.Aboutus">
+        update aboutus
+        <set>
+            <if test="aboutContent != null">
+                about_content = #{aboutContent,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where aboutus_id = #{aboutusId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mall.pojo.Aboutus">
+    update aboutus
+    set about_content = #{aboutContent,jdbcType=VARCHAR}
+    where aboutus_id = #{aboutusId,jdbcType=INTEGER}
+  </update>
+</mapper>

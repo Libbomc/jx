@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.dao.ContactMapper">
+    <resultMap id="BaseResultMap" type="com.mall.pojo.Contact">
+        <constructor>
+            <idArg column="contact_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="contact_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="contact_email" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="contact_phone" jdbcType="BIGINT" javaType="java.lang.Long"/>
+            <arg column="contact_message" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        contact_id, contact_name, contact_email, contact_phone, contact_message
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from contact
+        where contact_id = #{contactId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from contact
+        where contact_id = #{contactId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.mall.pojo.Contact">
+        insert into contact (contact_id, contact_name, contact_email,
+        contact_phone, contact_message)
+        values (#{contactId,jdbcType=INTEGER}, #{contactName,jdbcType=VARCHAR}, #{contactEmail,jdbcType=VARCHAR},
+        #{contactPhone,jdbcType=BIGINT}, #{contactMessage,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.mall.pojo.Contact">
+        insert into contact
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="contactId != null">
+                contact_id,
+            </if>
+            <if test="contactName != null">
+                contact_name,
+            </if>
+            <if test="contactEmail != null">
+                contact_email,
+            </if>
+            <if test="contactPhone != null">
+                contact_phone,
+            </if>
+            <if test="contactMessage != null">
+                contact_message,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="contactId != null">
+                #{contactId,jdbcType=INTEGER},
+            </if>
+            <if test="contactName != null">
+                #{contactName,jdbcType=VARCHAR},
+            </if>
+            <if test="contactEmail != null">
+                #{contactEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPhone != null">
+                #{contactPhone,jdbcType=BIGINT},
+            </if>
+            <if test="contactMessage != null">
+                #{contactMessage,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mall.pojo.Contact">
+        update contact
+        <set>
+            <if test="contactName != null">
+                contact_name = #{contactName,jdbcType=VARCHAR},
+            </if>
+            <if test="contactEmail != null">
+                contact_email = #{contactEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPhone != null">
+                contact_phone = #{contactPhone,jdbcType=BIGINT},
+            </if>
+            <if test="contactMessage != null">
+                contact_message = #{contactMessage,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where contact_id = #{contactId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mall.pojo.Contact">
+        update contact
+        set contact_name = #{contactName,jdbcType=VARCHAR},
+        contact_email = #{contactEmail,jdbcType=VARCHAR},
+        contact_phone = #{contactPhone,jdbcType=BIGINT},
+        contact_message = #{contactMessage,jdbcType=VARCHAR}
+        where contact_id = #{contactId,jdbcType=INTEGER}
+    </update>
+</mapper>

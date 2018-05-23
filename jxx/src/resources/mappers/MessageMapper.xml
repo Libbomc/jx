@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.dao.MessageMapper">
+    <resultMap id="BaseResultMap" type="com.mall.pojo.Message">
+        <constructor>
+            <idArg column="message_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="message_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="message_content" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="message_phone" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    message_id, message_name, message_content, message_phone
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from message
+        where message_id = #{messageId,jdbcType=INTEGER}
+    </select>
+    <select id="findByMessageName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from message
+        where message_name = #{messageName,jdbcType=VARCHAR}
+    </select>
+    <select id="findAll" resultMap="BaseResultMap">
+    select * from message
+  </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from message
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.mall.pojo.Message">
+    insert into message (message_id, message_name, message_content, 
+      message_phone)
+    values (#{messageId,jdbcType=INTEGER}, #{messageName,jdbcType=VARCHAR}, #{messageContent,jdbcType=VARCHAR}, 
+      #{messagePhone,jdbcType=BIGINT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.mall.pojo.Message">
+        insert into message
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="messageId != null">
+                message_id,
+            </if>
+            <if test="messageName != null">
+                message_name,
+            </if>
+            <if test="messageContent != null">
+                message_content,
+            </if>
+            <if test="messagePhone != null">
+                message_phone,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="messageId != null">
+                #{messageId,jdbcType=INTEGER},
+            </if>
+            <if test="messageName != null">
+                #{messageName,jdbcType=VARCHAR},
+            </if>
+            <if test="messageContent != null">
+                #{messageContent,jdbcType=VARCHAR},
+            </if>
+            <if test="messagePhone != null">
+                #{messagePhone,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mall.pojo.Message">
+        update message
+        <set>
+            <if test="messageName != null">
+                message_name = #{messageName,jdbcType=VARCHAR},
+            </if>
+            <if test="messageContent != null">
+                message_content = #{messageContent,jdbcType=VARCHAR},
+            </if>
+            <if test="messagePhone != null">
+                message_phone = #{messagePhone,jdbcType=BIGINT},
+            </if>
+        </set>
+        where message_id = #{messageId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mall.pojo.Message">
+    update message
+    set message_name = #{messageName,jdbcType=VARCHAR},
+      message_content = #{messageContent,jdbcType=VARCHAR},
+      message_phone = #{messagePhone,jdbcType=BIGINT}
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
+</mapper>

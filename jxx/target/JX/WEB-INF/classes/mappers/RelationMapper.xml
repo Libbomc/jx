@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.dao.RelationMapper">
+    <resultMap id="BaseResultMap" type="com.mall.pojo.Relation">
+        <constructor>
+            <idArg column="relation_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="relation_uid" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="relation_rid" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    relation_id, relation_uid, relation_rid
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from relation
+        where relation_id = #{relationId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from relation
+    where relation_id = #{relationId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.mall.pojo.Relation">
+    insert into relation (relation_id, relation_uid, relation_rid
+      )
+    values (#{relationId,jdbcType=INTEGER}, #{relationUid,jdbcType=INTEGER}, #{relationRid,jdbcType=INTEGER}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.mall.pojo.Relation">
+        insert into relation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="relationId != null">
+                relation_id,
+            </if>
+            <if test="relationUid != null">
+                relation_uid,
+            </if>
+            <if test="relationRid != null">
+                relation_rid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="relationId != null">
+                #{relationId,jdbcType=INTEGER},
+            </if>
+            <if test="relationUid != null">
+                #{relationUid,jdbcType=INTEGER},
+            </if>
+            <if test="relationRid != null">
+                #{relationRid,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mall.pojo.Relation">
+        update relation
+        <set>
+            <if test="relationUid != null">
+                relation_uid = #{relationUid,jdbcType=INTEGER},
+            </if>
+            <if test="relationRid != null">
+                relation_rid = #{relationRid,jdbcType=INTEGER},
+            </if>
+        </set>
+        where relation_id = #{relationId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mall.pojo.Relation">
+    update relation
+    set relation_uid = #{relationUid,jdbcType=INTEGER},
+      relation_rid = #{relationRid,jdbcType=INTEGER}
+    where relation_id = #{relationId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.dao.ChallengeMapper">
+    <resultMap id="BaseResultMap" type="com.mall.pojo.Challenge">
+        <constructor>
+            <idArg column="challenge_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="challenge_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="challenge_chall" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="challenge_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    challenge_id, challenge_name, challenge_chall,challenge_time
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from challenge
+        where challenge_id = #{challengeId,jdbcType=INTEGER}
+    </select>
+    <select id="selectByPrimaryName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from challenge
+        where challenge_name = #{challengeName,jdbcType=VARCHAR}
+    </select>
+    <select id="findAll" resultMap="BaseResultMap">
+    select
+    *
+    from challenge
+  </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from challenge
+    where challenge_id = #{challengeId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.mall.pojo.Challenge">
+    insert into challenge (challenge_id, challenge_name, challenge_chall,challenge_time
+      )
+    values (#{challengeId,jdbcType=INTEGER}, #{challengeName,jdbcType=VARCHAR}, #{challengeChall,jdbcType=VARCHAR}
+             ,#{challengeTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.mall.pojo.Challenge">
+        insert into challenge
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="challengeId != null">
+                challenge_id,
+            </if>
+            <if test="challengeName != null">
+                challenge_name,
+            </if>
+            <if test="challengeChall != null">
+                challenge_chall,
+            </if>
+            <if test="challengeTime != null">
+                challenge_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="challengeId != null">
+                #{challengeId,jdbcType=INTEGER},
+            </if>
+            <if test="challengeName != null">
+                #{challengeName,jdbcType=VARCHAR},
+            </if>
+            <if test="challengeChall != null">
+                #{challengeChall,jdbcType=VARCHAR},
+            </if>
+            <if test="challengeTime != null">
+                #{challengeTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mall.pojo.Challenge">
+        update challenge
+        <set>
+            <if test="challengeName != null">
+                challenge_name = #{challengeName,jdbcType=VARCHAR},
+            </if>
+            <if test="challengeChall != null">
+                challenge_chall = #{challengeChall,jdbcType=VARCHAR},
+            </if>
+            <if test="challengeTime != null">
+                challenge_time = #{challengeTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where challenge_id = #{challengeId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mall.pojo.Challenge">
+    update challenge
+    set challenge_name = #{challengeName,jdbcType=VARCHAR},
+      challenge_chall = #{challengeChall,jdbcType=VARCHAR},
+      challenge_time = #{challengeTime,jdbcType=TIMESTAMP}
+    where challenge_id = #{challengeId,jdbcType=INTEGER}
+  </update>
+</mapper>

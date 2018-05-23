@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.dao.EncyclopediaMapper">
+    <resultMap id="BaseResultMap" type="com.mall.pojo.Encyclopedia">
+        <constructor>
+            <idArg column="encyclopedia_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="encyclopedia_genre" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="encyclopedia_title" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="encyclopedia_introduction" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="encyclopedia_url" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        encyclopedia_id, encyclopedia_genre, encyclopedia_title, encyclopedia_introduction
+        ,encyclopedia_url
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from encyclopedia
+        where encyclopedia_id = #{encyclopediaId,jdbcType=INTEGER}
+    </select>
+    <select id="selectByPrimaryTitle" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from encyclopedia
+        where encyclopedia_title = #{encyclopediaTitle,jdbcType=INTEGER}
+    </select>
+    <select id="findAll" resultMap="BaseResultMap">
+        SELECT * from encyclopedia
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from encyclopedia
+        where encyclopedia_id = #{encyclopediaId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.mall.pojo.Encyclopedia">
+        insert into encyclopedia (encyclopedia_id, encyclopedia_genre,
+        encyclopedia_title, encyclopedia_introduction,
+        encyclopedia_url)
+        values (#{encyclopediaId,jdbcType=INTEGER}, #{encyclopediaGenre,jdbcType=VARCHAR},
+        #{encyclopediaTitle,jdbcType=VARCHAR}, #{encyclopediaIntroduction,jdbcType=VARCHAR},
+        #{encyclopediaUrl,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.mall.pojo.Encyclopedia">
+        insert into encyclopedia
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="encyclopediaId != null">
+                encyclopedia_id,
+            </if>
+            <if test="encyclopediaGenre != null">
+                encyclopedia_genre,
+            </if>
+            <if test="encyclopediaTitle != null">
+                encyclopedia_title,
+            </if>
+            <if test="encyclopediaIntroduction != null">
+                encyclopedia_introduction,
+            </if>
+            <if test="encyclopediaUrl != null">
+                encyclopedia_url,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="encyclopediaId != null">
+                #{encyclopediaId,jdbcType=INTEGER},
+            </if>
+            <if test="encyclopediaGenre != null">
+                #{encyclopediaGenre,jdbcType=VARCHAR},
+            </if>
+            <if test="encyclopediaTitle != null">
+                #{encyclopediaTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="encyclopediaIntroduction != null">
+                #{encyclopediaIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="encyclopediaUrl != null">
+                #{encyclopediaUrl,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mall.pojo.Encyclopedia">
+        update encyclopedia
+        <set>
+            <if test="encyclopediaGenre != null">
+                encyclopedia_genre = #{encyclopediaGenre,jdbcType=VARCHAR},
+            </if>
+            <if test="encyclopediaTitle != null">
+                encyclopedia_title = #{encyclopediaTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="encyclopediaIntroduction != null">
+                encyclopedia_introduction = #{encyclopediaIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="encyclopediaUrl != null">
+                encyclopedia_url = #{encyclopediaUrl,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where encyclopedia_id = #{encyclopediaId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mall.pojo.Encyclopedia">
+        update encyclopedia
+        set encyclopedia_genre = #{encyclopediaGenre,jdbcType=VARCHAR},
+        encyclopedia_title = #{encyclopediaTitle,jdbcType=VARCHAR},
+        encyclopedia_introduction = #{encyclopediaIntroduction,jdbcType=VARCHAR},
+        encyclopedia_url = #{encyclopediaUrl,jdbcType=VARCHAR}
+        where encyclopedia_id = #{encyclopediaId,jdbcType=INTEGER}
+    </update>
+
+    <update id="encyclopediaPhoto" parameterType="com.mall.pojo.Encyclopedia">
+        update encyclopedia
+        <set>
+
+            <if test="encyclopediaUrl != null">
+                encyclopedia_url = #{encyclopediaUrl,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where encyclopedia_id = #{encyclopediaId,jdbcType=INTEGER}
+    </update>
+
+</mapper>

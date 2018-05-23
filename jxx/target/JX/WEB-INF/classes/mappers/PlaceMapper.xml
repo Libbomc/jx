@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.dao.PlaceMapper">
+    <resultMap id="BaseResultMap" type="com.mall.pojo.Place">
+        <constructor>
+            <idArg column="place_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="place_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="place_address" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="place_introduction" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="place_time" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="place_url" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        place_id, place_name, place_address, place_introduction, place_time, place_url
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from place
+        where place_id = #{placeId,jdbcType=INTEGER}
+    </select>
+    <select id="selectByPrimaryName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from place
+        where place_Name = #{placeName,jdbcType=INTEGER}
+    </select>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from place
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from place
+        where place_id = #{placeId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.mall.pojo.Place">
+        insert into place (place_id, place_name, place_address,
+        place_introduction, place_time, place_url
+        )
+        values (#{placeId,jdbcType=INTEGER}, #{placeName,jdbcType=VARCHAR}, #{placeAddress,jdbcType=VARCHAR},
+        #{placeIntroduction,jdbcType=VARCHAR}, #{placeTime,jdbcType=VARCHAR}, #{placeUrl,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.mall.pojo.Place">
+        insert into place
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="placeId != null">
+                place_id,
+            </if>
+            <if test="placeName != null">
+                place_name,
+            </if>
+            <if test="placeAddress != null">
+                place_address,
+            </if>
+            <if test="placeIntroduction != null">
+                place_introduction,
+            </if>
+            <if test="placeTime != null">
+                place_time,
+            </if>
+            <if test="placeUrl != null">
+                place_url,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="placeId != null">
+                #{placeId,jdbcType=INTEGER},
+            </if>
+            <if test="placeName != null">
+                #{placeName,jdbcType=VARCHAR},
+            </if>
+            <if test="placeAddress != null">
+                #{placeAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="placeIntroduction != null">
+                #{placeIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="placeTime != null">
+                #{placeTime,jdbcType=VARCHAR},
+            </if>
+            <if test="placeUrl != null">
+                #{placeUrl,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mall.pojo.Place">
+        update place
+        <set>
+            <if test="placeName != null">
+                place_name = #{placeName,jdbcType=VARCHAR},
+            </if>
+            <if test="placeAddress != null">
+                place_address = #{placeAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="placeIntroduction != null">
+                place_introduction = #{placeIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="placeTime != null">
+                place_time = #{placeTime,jdbcType=VARCHAR},
+            </if>
+            <if test="placeUrl != null">
+                place_url = #{placeUrl,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where place_id = #{placeId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mall.pojo.Place">
+        update place
+        set place_name = #{placeName,jdbcType=VARCHAR},
+        place_address = #{placeAddress,jdbcType=VARCHAR},
+        place_introduction = #{placeIntroduction,jdbcType=VARCHAR},
+        place_time = #{placeTime,jdbcType=VARCHAR},
+        place_url = #{placeUrl,jdbcType=VARCHAR}
+        where place_id = #{placeId,jdbcType=INTEGER}
+    </update>
+
+    <update id="placePhoto" parameterType="com.mall.pojo.Place">
+        update place
+        <set>
+
+            <if test="placeUrl != null">
+                place_url = #{placeUrl,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where place_id = #{placeId,jdbcType=INTEGER}
+    </update>
+</mapper>

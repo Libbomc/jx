@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.dao.CompetitionInformationMapper">
+    <resultMap id="BaseResultMap" type="com.mall.pojo.CompetitionInformation">
+        <constructor>
+            <idArg column="competition_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="competition_title" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="competition_time" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="competition_type" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    competition_id, competition_title, competition_time, competition_type
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from competitioninformation
+        where competition_id = #{competitionId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from competitioninformation
+    where competition_id = #{competitionId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.mall.pojo.CompetitionInformation">
+    insert into competitioninformation (competition_id, competition_title, 
+      competition_time, competition_type)
+    values (#{competitionId,jdbcType=INTEGER}, #{competitionTitle,jdbcType=VARCHAR}, 
+      #{competitionTime,jdbcType=VARCHAR}, #{competitionType,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.mall.pojo.CompetitionInformation">
+        insert into competitioninformation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="competitionId != null">
+                competition_id,
+            </if>
+            <if test="competitionTitle != null">
+                competition_title,
+            </if>
+            <if test="competitionTime != null">
+                competition_time,
+            </if>
+            <if test="competitionType != null">
+                competition_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="competitionId != null">
+                #{competitionId,jdbcType=INTEGER},
+            </if>
+            <if test="competitionTitle != null">
+                #{competitionTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="competitionTime != null">
+                #{competitionTime,jdbcType=VARCHAR},
+            </if>
+            <if test="competitionType != null">
+                #{competitionType,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mall.pojo.CompetitionInformation">
+        update competitioninformation
+        <set>
+            <if test="competitionTitle != null">
+                competition_title = #{competitionTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="competitionTime != null">
+                competition_time = #{competitionTime,jdbcType=VARCHAR},
+            </if>
+            <if test="competitionType != null">
+                competition_type = #{competitionType,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where competition_id = #{competitionId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mall.pojo.CompetitionInformation">
+    update competitioninformation
+    set competition_title = #{competitionTitle,jdbcType=VARCHAR},
+      competition_time = #{competitionTime,jdbcType=VARCHAR},
+      competition_type = #{competitionType,jdbcType=VARCHAR}
+    where competition_id = #{competitionId,jdbcType=INTEGER}
+  </update>
+</mapper>

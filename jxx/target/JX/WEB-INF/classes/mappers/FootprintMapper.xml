@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.dao.FootprintMapper">
+    <resultMap id="BaseResultMap" type="com.mall.pojo.Footprint">
+        <constructor>
+            <idArg column="footprint_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="footprint_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="footprint_foot" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    footprint_id, footprint_name, footprint_foot
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from footprint
+        where footprint_id = #{footprintId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from footprint
+    where footprint_id = #{footprintId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.mall.pojo.Footprint">
+    insert into footprint (footprint_id, footprint_name, footprint_foot
+      )
+    values (#{footprintId,jdbcType=INTEGER}, #{footprintName,jdbcType=VARCHAR}, #{footprintFoot,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.mall.pojo.Footprint">
+        insert into footprint
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="footprintId != null">
+                footprint_id,
+            </if>
+            <if test="footprintName != null">
+                footprint_name,
+            </if>
+            <if test="footprintFoot != null">
+                footprint_foot,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="footprintId != null">
+                #{footprintId,jdbcType=INTEGER},
+            </if>
+            <if test="footprintName != null">
+                #{footprintName,jdbcType=VARCHAR},
+            </if>
+            <if test="footprintFoot != null">
+                #{footprintFoot,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mall.pojo.Footprint">
+        update footprint
+        <set>
+            <if test="footprintName != null">
+                footprint_name = #{footprintName,jdbcType=VARCHAR},
+            </if>
+            <if test="footprintFoot != null">
+                footprint_foot = #{footprintFoot,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where footprint_id = #{footprintId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mall.pojo.Footprint">
+    update footprint
+    set footprint_name = #{footprintName,jdbcType=VARCHAR},
+      footprint_foot = #{footprintFoot,jdbcType=VARCHAR}
+    where footprint_id = #{footprintId,jdbcType=INTEGER}
+  </update>
+</mapper>
